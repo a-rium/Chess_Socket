@@ -9,10 +9,8 @@ import java.io.IOException;
 import xyz.arium.chesssocket.shared.SocketIO;
 import xyz.arium.chesssocket.shared.Message;
 import xyz.arium.chesssocket.shared.PieceColor;
-import xyz.arium.chesssocket.shared.ChessException;
 
-public class ChessServer extends Thread
-{
+public class ChessServer {
 	private ServerSocket server;
 	private SocketIO firstPlayer, secondPlayer; 
 
@@ -23,23 +21,22 @@ public class ChessServer extends Thread
 	}
 
 	public void run() {
+        this.running = true;
         try {
             waitForPlayersToConnect();
-            Message firstPlayerChoice = firstPlayer.readMessage();
-            Message secondPlayerChoice = secondPlayer.readMessage();
 
-            if (firstPlayerChoice.getPieceColor().equals(secondPlayerChoice.getPieceColor())) {
-                if (Math.round(Math.random()) == 1) {
-                    firstPlayer.sendMessage(new Message(PieceColor.BLACK));
-                    secondPlayer.sendMessage(new Message(PieceColor.WHITE));
-                } else {
-                    firstPlayer.sendMessage(new Message(PieceColor.WHITE));
-                    secondPlayer.sendMessage(new Message(PieceColor.BLACK));
-                }
-
+            // Choose player color
+            if (Math.round(Math.random()) == 1) {
+                firstPlayer.sendMessage(new Message(PieceColor.BLACK));
+                secondPlayer.sendMessage(new Message(PieceColor.WHITE));
+            } else {
+                firstPlayer.sendMessage(new Message(PieceColor.WHITE));
+                secondPlayer.sendMessage(new Message(PieceColor.BLACK));
             }
-        } catch (ChessException | IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Unexpected server fault", e);
+        } finally {
+            halt();
         }
     }
 
@@ -47,7 +44,7 @@ public class ChessServer extends Thread
         this.running = false;
 	}
 
-    public void waitForPlayersToConnect() throws IOException {
+    private void waitForPlayersToConnect() throws IOException {
         while(running && (firstPlayer == null || secondPlayer == null)) {
             Socket newConnection = server.accept();
             this.secondPlayer = firstPlayer;
