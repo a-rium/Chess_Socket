@@ -1,4 +1,4 @@
-package server;
+package xyz.arium.chesssocket.client;
 
 public class Main
 {

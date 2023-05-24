@@ -1,4 +1,4 @@
-package shared;
+package xyz.arium.chesssocket.shared;
 
 public class InvalidMoveException extends Exception
 {

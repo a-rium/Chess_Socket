@@ -1,15 +1,15 @@
-package server;
+package xyz.arium.chesssocket.server;
 
-import shared.SocketIO;
 
 import java.net.Socket;
 import java.net.ServerSocket;
 
 import java.io.IOException;
 
-import shared.Message;
-import shared.PieceColor;
-import shared.ChessException;
+import xyz.arium.chesssocket.shared.SocketIO;
+import xyz.arium.chesssocket.shared.Message;
+import xyz.arium.chesssocket.shared.PieceColor;
+import xyz.arium.chesssocket.shared.ChessException;
 
 public class ChessServer extends Thread
 {
