@@ -7,12 +7,10 @@ import java.io.ObjectOutputStream;
 import java.io.IOException;
 
 public class SocketIO {
-	public ObjectInputStream in;
-	public ObjectOutputStream out;
-	public Socket socket;
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
 
 	public SocketIO(Socket socket) throws IOException {
-		this.socket = socket;
 		in = new ObjectInputStream(socket.getInputStream());
 		out = new ObjectOutputStream(socket.getOutputStream());
 	}
