@@ -3,10 +3,12 @@ package xyz.arium.chesssocket.shared;
 import java.io.Serializable;
 
 public class Message implements Serializable {
+    private String command;
 	private PieceColor pieceColor;
 	private ChessMove move;
 
-	public Message(PieceColor pieceColor) { 
+	public Message(String command, PieceColor pieceColor) { 
+        this.command = command;
         this.pieceColor = pieceColor;
         this.move = null;
 	}
@@ -23,5 +25,9 @@ public class Message implements Serializable {
 	public ChessMove getMove() {
 		return move;
 	}
+
+    public String getCommand() {
+        return command;
+    }
 
 }

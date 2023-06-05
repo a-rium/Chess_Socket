@@ -27,11 +27,11 @@ public class ChessServer {
 
             // Choose player color
             if (Math.round(Math.random()) == 1) {
-                firstPlayer.sendMessage(new Message(PieceColor.BLACK));
-                secondPlayer.sendMessage(new Message(PieceColor.WHITE));
+                firstPlayer.sendMessage(new Message("init", PieceColor.BLACK));
+                secondPlayer.sendMessage(new Message("init", PieceColor.WHITE));
             } else {
-                firstPlayer.sendMessage(new Message(PieceColor.WHITE));
-                secondPlayer.sendMessage(new Message(PieceColor.BLACK));
+                firstPlayer.sendMessage(new Message("init", PieceColor.WHITE));
+                secondPlayer.sendMessage(new Message("init", PieceColor.BLACK));
             }
         } catch (IOException e) {
             throw new RuntimeException("Unexpected server fault", e);
